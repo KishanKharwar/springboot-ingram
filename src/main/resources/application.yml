@@ -1,0 +1,15 @@
+#spring:
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          cisco:
+#            client-id: yzww2drfcngx7smpfv43vwh8
+#            client-secret: PJsk6fu7THTXDe4STHDHG2mF
+#            authorization-grant-type: password
+#            username: 00u5263z5pI774kFD5d7
+#            password: March2022!
+#
+#        provider:
+#          cisco:
+#            token-uri: https://cloudsso.cisco.com/as/token.oauth2
