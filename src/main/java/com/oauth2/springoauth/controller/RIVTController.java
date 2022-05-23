@@ -1,5 +1,6 @@
 package com.oauth2.springoauth.controller;
 
+import com.oauth2.springoauth.beans.GetRessellerDataResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.oauth2.springoauth.beans.OrderStatusAccessToken;
-import com.oauth2.springoauth.beans.OrderStatusResponse;
 
 @RestController
 public class RIVTController {
@@ -36,9 +36,9 @@ public class RIVTController {
 
 		HttpEntity<String> entity = new HttpEntity<>(requestString, h);
 		System.out.println(entity);
-		ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.POST, entity, String.class);
+		ResponseEntity<GetRessellerDataResponse> response = restTemplate.exchange(uri, HttpMethod.POST, entity, GetRessellerDataResponse.class);
 		System.out.println(response);
-		return response.getBody();
+		return response.getBody().toString();
 	}
 
 	@GetMapping("/orderStatus")
@@ -76,8 +76,8 @@ public class RIVTController {
 		
 		HttpEntity<String> requestEntity = new HttpEntity<>(request,h);
 		
-		ResponseEntity<OrderStatusResponse> response = restTemplate.exchange(uri,HttpMethod.POST,requestEntity,OrderStatusResponse.class);
-		System.out.println(response.getBody().getShowPurchaseOrderObject());
+		ResponseEntity<String> response = restTemplate.exchange(uri,HttpMethod.POST,requestEntity,String.class);
+		System.out.println(response.getBody());
 		return response.getBody().toString();
 	}
 

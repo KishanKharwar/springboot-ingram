@@ -9,10 +9,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Address {
-	private AddressLine AddressLine;
-	private String CityName;
-	private String CountrySubDivisionCode;
-	private String CountryCode;
-	private int PostalCode;
+public class ResellerDataEntityRequest {
+  private String country;
+  private String pageNumber;
+  private String theaterCode;
+  private String pageSize;
+  private String sourceName;
 }
