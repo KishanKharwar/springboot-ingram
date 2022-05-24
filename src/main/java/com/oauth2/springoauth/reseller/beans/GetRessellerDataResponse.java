@@ -1,4 +1,4 @@
-package com.oauth2.springoauth.beans;
+package com.oauth2.springoauth.reseller.beans;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
