@@ -41,32 +41,21 @@ public class RIVTController {
 	@GetMapping("/rivt")
 	@Retryable(HttpServerErrorException.class)
 	public String testRIVTApi() {
-//		// RestTemplate restTemplate = new RestTemplate();
-//		//String uri = "https://wsgx.cisco.com/wwchannels/services/external/getData";
-//
-//		String requestString = "{\n" + "    \"service\": \"getRessellerData\",\n" + "    \"ccoId\": \"IMDISTI\",\n"
-//				+ "    \"profileId\": \"3\",\n" + "    \"entity\": [{\n" + "        \"sourceName\": \"INGRAM MICRO\",\n"
-//				+ "        \"theaterCode\": \"USA\",\n" + "        \"country\": \"USA\",\n"
-//				+ "        \"pageNumber\": 2,\n" + "        \"pageSize\": 100\n" + "    }]\n" + "}";
-
-		HttpHeaders h = new HttpHeaders();
 		
+		HttpHeaders h = new HttpHeaders();
 		String s = createJsonRequest();
 		System.out.println("Request in sting : " + s);
-		
-		
 		h.setBasicAuth(username, password);
 		h.setContentType(MediaType.APPLICATION_JSON);
 
 		HttpEntity<String> entity = new HttpEntity<>(s, h);
-		System.out.println(entity);
+//		System.out.println(entity);
 		ResponseEntity<GetRessellerDataResponse> response = restTemplate.exchange(apiUrl, HttpMethod.POST, entity, GetRessellerDataResponse.class);
-		System.out.println(response);
+//		System.out.println(response);
 		return response.getBody().toString();
 	}
 
 	private String createJsonRequest() {
-		
 		ResellerDataEntityRequest entity = new ResellerDataEntityRequest("USA","1","USA","100","INGRAM MICRO");
 		List<ResellerDataEntityRequest> entityList = new ArrayList<>();
 		entityList.add(entity);
