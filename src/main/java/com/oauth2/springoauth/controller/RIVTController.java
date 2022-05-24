@@ -1,16 +1,18 @@
 package com.oauth2.springoauth.controller;
 
-import com.oauth2.springoauth.beans.GetRessellerDataResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import com.oauth2.springoauth.beans.GetRessellerDataResponse;
 import com.oauth2.springoauth.beans.OrderStatusAccessToken;
 
 @RestController
@@ -20,6 +22,7 @@ public class RIVTController {
 	private RestTemplate restTemplate;
 
 	@GetMapping("/rivt")
+	@Retryable(HttpServerErrorException.class)
 	public String testRIVTApi() {
 		// RestTemplate restTemplate = new RestTemplate();
 		String uri = "https://wsgx.cisco.com/wwchannels/services/external/getData";
@@ -27,7 +30,7 @@ public class RIVTController {
 		String requestString = "{\n" + "    \"service\": \"getRessellerData\",\n" + "    \"ccoId\": \"IMDISTI\",\n"
 				+ "    \"profileId\": \"3\",\n" + "    \"entity\": [{\n" + "        \"sourceName\": \"INGRAM MICRO\",\n"
 				+ "        \"theaterCode\": \"USA\",\n" + "        \"country\": \"USA\",\n"
-				+ "        \"pageNumber\": 2,\n" + "        \"pageSize\": 10\n" + "    }]\n" + "}";
+				+ "        \"pageNumber\": 2,\n" + "        \"pageSize\": 100\n" + "    }]\n" + "}";
 
 		HttpHeaders h = new HttpHeaders();
 
