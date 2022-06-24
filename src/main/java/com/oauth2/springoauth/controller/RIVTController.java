@@ -47,7 +47,7 @@ public class RIVTController {
 		String totalItems = "";
 		int noOfRequests = 0;
 
-		request = createJsonRequest("1", "100");
+		request = createJsonRequest("1", "10");
 		System.out.println("Request in sting : " + request);
 
 		h = new HttpHeaders();
@@ -56,18 +56,19 @@ public class RIVTController {
 
 		entity = new HttpEntity<>(request, h);
 		response = restTemplate.exchange(apiUrl, HttpMethod.POST, entity, GetRessellerDataResponse.class);
-
-		totalItems = response.getBody().getTotalItems();
-
-		if (Integer.valueOf(totalItems) > 100) {
-			noOfRequests = Integer.valueOf(totalItems) + 1;
-
-			for (int i = 2; i <= noOfRequests; i++) {
-				request = createJsonRequest("" + i, "100");
-				entity = new HttpEntity<>(request, h);
-				response = restTemplate.exchange(apiUrl, HttpMethod.POST, entity, GetRessellerDataResponse.class);
-			}
-		}
+		System.out.println(response);
+		//System.exit(-1);
+//		totalItems = response.getBody().getTotalItems();
+//
+//		if (Integer.valueOf(totalItems) > 10) {
+//			noOfRequests = Integer.valueOf(totalItems) + 1;
+//
+//			for (int i = 2; i <= noOfRequests; i++) {
+//				request = createJsonRequest("" + i, "10");
+//				entity = new HttpEntity<>(request, h);
+//				response = restTemplate.exchange(apiUrl, HttpMethod.POST, entity, GetRessellerDataResponse.class);
+//			}
+//		}
 
 		return response.getBody().toString();
 	}
